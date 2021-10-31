@@ -8,6 +8,10 @@ import java.io.IOException;
 
 @WebServlet(name = "LoginServlet", value = "/login")
 public class LoginServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/index.html").forward(req,resp);
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -17,7 +21,7 @@ public class LoginServlet extends HttpServlet {
             request.getSession().setAttribute("username", user);
             response.sendRedirect("admin");
         } else {
-            response.sendRedirect("error.html");
+            response.sendRedirect("error.jsp");
         }
     }
 }

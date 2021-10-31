@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+
 <html lang="">
 <head>
     <meta charset="UTF-8">
@@ -6,6 +8,6 @@
 <body>
 <h2>Error</h2>
 <p>Check your credentials</p>
-<p><a href="index.html">Back to log in form</a></p>
+<p><a href=<%=request.getContextPath()%>"login">Back to log in form</a></p>
 </body>
 </html>
