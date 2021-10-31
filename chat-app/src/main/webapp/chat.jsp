@@ -13,10 +13,10 @@
 </header>
 <main>
     <c:choose>
-        <c:when test="${applicationScope.chat.size()>0}">
+        <c:when test="${not empty chat}">
             <ul class="message-list">
-                <c:forEach items="${applicationScope.chat}" var="message">
-                    <li><c:out value="${message.author}: ${message.message}"/></li>
+                <c:forEach items="${chat}" var="message">
+                    <li><c:out value="${message}"/></li>
                 </c:forEach>
             </ul>
         </c:when>

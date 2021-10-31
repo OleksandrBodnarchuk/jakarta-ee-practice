@@ -13,15 +13,13 @@ public class Message {
         return author;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
 
     public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    @Override
+    public String toString() {
+        return author+": "+ message;
     }
 }
