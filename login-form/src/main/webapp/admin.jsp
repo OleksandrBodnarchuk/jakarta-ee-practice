@@ -4,7 +4,7 @@
     <title>Panel Admin</title>
 </head>
 <body>
-<h1>Cześć <%=request.getAttribute("username")%></h1>
+<h1>Cześć <%=request.getSession().getAttribute("username")%></h1>
 <p>Here is your control panel: </p>
 <ul>
     <li>Manage users</li>

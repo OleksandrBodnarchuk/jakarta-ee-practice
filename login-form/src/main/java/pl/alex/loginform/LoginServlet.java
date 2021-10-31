@@ -14,10 +14,10 @@ public class LoginServlet extends HttpServlet {
         String user = request.getParameter("user");
         String password = request.getParameter("password");
         if ("admin".equals(user) && "admin".equals(password)) {
-            request.setAttribute("username", user);
-            request.getRequestDispatcher("/admin.jsp").forward(request, response);
+            request.getSession().setAttribute("username", user);
+            response.sendRedirect("admin");
         } else {
-            request.getRequestDispatcher("/error.html").forward(request, response);
+            response.sendRedirect("error.html");
         }
     }
 }
