@@ -1,4 +1,5 @@
-<jsp:useBean id="person" scope="request" type="pl.alex.jstlelpractice.Person"/>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -23,21 +24,31 @@
             <label for="age">Age</label>
             <input type="number" id="age" name="age" min="0">
         </div>
-
+            <div>
+                <label for="gender">Gender</label>
+                <select name="gender" id="gender">
+                    <option value="MALE">Male</option>
+                    <option value="FEMALE">Female</option>
+                </select>
+            </div>
         </fieldset>
         <button type="submit">Submit Form</button>
     </form>
 
-    <%
-        if(request.getAttribute("person") != null) {
-    %>
-    <h2>Hi ${person.name}</h2>
-    <p style="color: ${person.age gt 18 ? 'green' : 'red'}">
-        ${person.age gt 18 ? 'You are mature' : 'You are teen'}
-    </p>
-    <p>Your browser info: ${header['user-agent']}</p>
-    <%
-        }
-    %>
+    <ol>
+        <c:forEach items="${applicationScope.people}" var="person">
+            <li>
+                ${person.name} - ${person.surname} (${person.age} y.o)/
+                ${person.gender=='MALE'?'Male':'Female'}
+                <c:if test="${person.age>=18}">
+                    <span style="color:green">Mature</span>
+                </c:if>
+                    <c:if test="${person.age<18}">
+                        <span style="color:red">Teen</span>
+                    </c:if>
+            </li>
+        </c:forEach>
+    </ol>
+
 </body>
 </html>
