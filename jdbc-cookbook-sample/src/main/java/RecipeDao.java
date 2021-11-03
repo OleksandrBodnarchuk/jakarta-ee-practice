@@ -15,17 +15,10 @@ public class RecipeDao {
         }
     }
 
-    void close() {
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     void save(Recipe recipe) {
-        final String insertQuery = String.format("insert into recipe (title, preptime, ingredients, description) " +
-                        "values('%s','%sd','%s','%s')", recipe.getTitle(), recipe.getPrepTime(),
+        final String insertQuery = String.format("insert into cookbook.recipe (title, preptime, ingredients, description) " +
+                        "values('%s','%d','%s','%s')", recipe.getTitle(), recipe.getPrepTime(),
                 recipe.getIngredients(), recipe.getDescription());
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(insertQuery, Statement.RETURN_GENERATED_KEYS);
@@ -40,7 +33,7 @@ public class RecipeDao {
 
     Optional<Recipe> findByTitle(String recipeTitle) {
         final String searchQuery =
-                "select id,title,ingredients,description from cookbook.recipe where title ='" + recipeTitle + "'";
+                "select id,title,preptime,ingredients,description from cookbook.recipe where title ='" + recipeTitle + "'";
         try (Statement statement = connection.createStatement()) {
             ResultSet set = statement.executeQuery(searchQuery);
             if (set.next()) {
@@ -66,4 +59,26 @@ public class RecipeDao {
             throw new RuntimeException(e);
         }
     }
+
+
+    boolean update(Recipe recipe) {
+        final String updateQuery = String.format("update recipe set title='%s',description='%s',ingredients='%s',preptime='%d' where id = '%d'",
+                recipe.getTitle(), recipe.getDescription(), recipe.getIngredients(), recipe.getPrepTime(), recipe.getId());
+        try (Statement statement = connection.createStatement()) {
+            int i = statement.executeUpdate(updateQuery);
+            return i != 0;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    void close() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

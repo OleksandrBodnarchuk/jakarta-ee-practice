@@ -1,7 +1,7 @@
 public class Recipe {
     private int id;
     private final String title;
-    private final int prepTime;
+    private int prepTime;
     private final String ingredients;
     private final String description;
 
@@ -47,6 +47,10 @@ public class Recipe {
     }
 
     public void setId(int anInt) {
-        this.id=anInt;
+        this.id = anInt;
+    }
+
+    public void setPrepTime(int i) {
+        this.prepTime = i;
     }
 }
