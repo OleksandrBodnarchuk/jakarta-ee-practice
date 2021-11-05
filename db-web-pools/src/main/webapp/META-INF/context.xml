@@ -1,0 +1,10 @@
+<Context path="/app">
+    <Resource name="jdbc/someDatabase"
+              factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+              type="javax.sql.DataSource"
+              username="root"
+              password="admin"
+              driverClassName="com.mysql.cj.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/someDatabase?serverTimezone=UTC"/>
+    <Environment name="secretMessage" value="hello from context.xml" type="java.lang.String"/>
+</Context>
